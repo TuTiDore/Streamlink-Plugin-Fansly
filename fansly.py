@@ -49,6 +49,20 @@ class FANSLY(Plugin):
         ),
     )
 
+    _ACCOUNT_SCHEMA = validate.Schema(
+        validate.parse_json(),
+        {
+            "response": [
+                {
+                    "username": str
+                }
+            ]
+        },
+        validate.get(
+            ("response", 0, "username")
+        ),
+    )
+
     _STREAMING_SCHEMA = validate.Schema(
         validate.parse_json(),
         {
@@ -67,11 +81,7 @@ class FANSLY(Plugin):
         # Not working when set headers inside __init__ ?
         auth = self.get_option("header-auth")[0]
         user_agent = self.get_option("header-user-agent")[0]
-        # TODO this was from some fansly scraper, maybe we just need authorization?
         headers = {
-            'Accept': 'application/json, text/plain, */*',
-            'Referer': 'https://fansly.com/',
-            'accept-language': 'en-US,en;q=0.9',
             'authorization': auth,
             'User-Agent': user_agent,
         }
@@ -82,11 +92,23 @@ class FANSLY(Plugin):
         scraper = cloudscraper.create_scraper()
         try:
             user_id = self.match["user_id"]
-            streaming_channel_response = scraper.get(
+
+            # This is needed for user_id match to get username
+            account = scraper.get(
+                f"{self._API_BASE}/account?ids={user_id}",
+                headers=headers,
+                params=params)
+            self.author = self._ACCOUNT_SCHEMA.validate(account.text)
+
+            # This is needed for username match to get user_id
+            # url = f"{self._API_BASE}/account?usernames={username}",
+            # _USERNAME_SCHEMA
+
+            stream = scraper.get(
                 f"{self._API_BASE}/streaming/channel/{user_id}",
                 headers=headers,
                 params=params)
-            url = self._STREAMING_SCHEMA.validate(streaming_channel_response.text)
+            url = self._STREAMING_SCHEMA.validate(stream.text)
 
         except (PluginError, TypeError) as err:
             log.debug(err)
