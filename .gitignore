@@ -1,2 +1,2 @@
-.idea
-streamlink
+venv
+*.config
