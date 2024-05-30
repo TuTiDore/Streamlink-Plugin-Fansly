@@ -76,8 +76,9 @@ class Fansly(Plugin):
             user_id = self.match["user_id"]
 
             # This is needed for user_id match to get username
+            account_url = f"{self._API_BASE}/account?ids={user_id}"
             account = requests.get(
-                f"{self._API_BASE}/account?ids={user_id}",
+                account_url,
                 headers=headers,
             )
             self.author = self._ACCOUNT_SCHEMA.validate(account.text)
@@ -86,7 +87,7 @@ class Fansly(Plugin):
             # url = f"{self._API_BASE}/account?usernames={username}",
             # _USERNAME_SCHEMA
 
-            stream_url = f"{self._API_BASE}/streaming/channel/{user_id}",
+            stream_url = f"{self._API_BASE}/streaming/channel/{user_id}"
             stream_meta = requests.get(
                 stream_url,
                 headers=headers,
