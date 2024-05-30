@@ -8,6 +8,15 @@
 
 Follow these instructions to get your token and user agent: <https://github.com/Avnsx/fansly-downloader/wiki/Get-Started#manual-set-up>.
 
+Or formatted nicely to copy/paste into `config.fansly`
+
+```js
+console.clear(); 
+const activeSession = localStorage.getItem("session_active_session");
+const { token } = JSON.parse(activeSession); 
+console.log(`fansly-header-auth=${token}\nfansly-header-user-agent=${navigator.userAgent}`)
+```
+
 Put values into the example [fansly config format](config.fansly.example) and copy to `%APPDATA%\streamlink\config.fansly`
 
 ## Usage
