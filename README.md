@@ -17,7 +17,7 @@ const { token } = JSON.parse(activeSession);
 console.log(`fansly-header-auth=${token}\nfansly-header-user-agent=${navigator.userAgent}`)
 ```
 
-Put values into the example [fansly config format](config.fansly.example) and copy to `%APPDATA%\streamlink\config.fansly`
+Put values into the example [fansly config format](fansly.config.example) and copy to `%APPDATA%\streamlink\config.fansly`
 
 ## Usage
 
