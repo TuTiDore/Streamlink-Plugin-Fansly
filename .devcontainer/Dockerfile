@@ -16,7 +16,7 @@ RUN mkdir -p $PLUGINS_DIR
 RUN ln -s $WORK_DIR/fansly.py $PLUGINS_DIR/fansly.py 
 
 # Link config
-ENV CONFIG_DIR=/home/vscode/.config/streamlink/config
+ENV CONFIG_DIR=/home/vscode/.config/streamlink
 RUN mkdir -p $CONFIG_DIR
 RUN touch $WORK_DIR/fansly.config
 RUN ln -s $WORK_DIR/fansly.config $CONFIG_DIR/config.fansly
