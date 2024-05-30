@@ -2,16 +2,13 @@
 
 ## Install
 
-- pip install [cloudscraper](https://pypi.org/project/cloudscraper)
-  - For streamlink on Windows with an embedded Python environment, you need to specify the target `--target=<StreamLinkInstallPath>\pkgs` or you will get `ModuleNotFoundError`.
 - Copy the [fansly.py](fansly.py) file into one of the [sideload directories](https://streamlink.github.io/cli/plugin-sideloading.html)
-  - Or run the python script [Copy to appdata](copy_to_appdata.py)
 
 ## Setup
 
 Follow these instructions to get your token and user agent: <https://github.com/Avnsx/fansly-downloader/wiki/Get-Started#manual-set-up>.
 
-Put values into the example [fansly config](config.fansly.example) and copy to `%APPDATA%\streamlink\config.fansly`
+Put values into the example [fansly config format](config.fansly.example) and copy to `%APPDATA%\streamlink\config.fansly`
 
 ## Usage
 
